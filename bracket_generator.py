@@ -203,7 +203,7 @@ if __name__ == '__main__':
         'florida-state',
         'north-carolina-greensboro',
         'brigham-young',
-        'michigan-state', # Update
+        'ucla', 
         'texas',
         'abilene-christian',
         'connecticut',

@@ -3,6 +3,7 @@
 ## Pipeline
 
 **Scrape Data**
+
 1. sos_list_scraper.py
     - scraped strength of schedule data
 2. gamelog_scraper.py
@@ -11,8 +12,8 @@
     - scrapes roster and playter per 100 posession data
 
 **Transform Data**
+
 4. gamelog_stats_transform.py
-    - TODO: Add season final stats func (from game_df_creator.py)
 5. data_merger.py
     - concats seasons
     - merges roster and player_per100 data

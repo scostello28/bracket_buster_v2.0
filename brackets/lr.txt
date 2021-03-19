@@ -12,7 +12,7 @@ michigan v texas-southern
 louisiana-state v st-bonaventure
 colorado v georgetown
 florida-state v north-carolina-greensboro
-brigham-young v michigan-state
+brigham-young v ucla
 texas v abilene-christian
 connecticut v maryland
 alabama v iona
@@ -42,7 +42,7 @@ southern-california v kansas
 oregon v iowa
 michigan v louisiana-state
 georgetown v florida-state
-michigan-state v texas
+ucla v texas
 maryland v alabama
 baylor v wisconsin
 villanova v purdue
@@ -59,7 +59,7 @@ Sweet 16
 missouri v creighton
 kansas v iowa
 michigan v georgetown
-michigan-state v maryland
+texas v maryland
 wisconsin v purdue
 texas-tech v ohio-state
 illinois v tennessee
