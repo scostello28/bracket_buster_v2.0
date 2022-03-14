@@ -171,7 +171,7 @@ if __name__ == '__main__':
     # Dependencies:
     # - sos_csv_creator
 
-    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
+    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
 
     roster_scraper(seasons, source_dir="0_scraped_data", output_dir="0_scraped_data")
 
