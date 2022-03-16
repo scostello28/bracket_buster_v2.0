@@ -49,6 +49,12 @@
 3. player_scraper.py
     - add new year to seasons list in `if __name__ == '__main__'` block
 4. gamelog_stats_transform.py
+    - add new year to seasons list in `if __name__ == '__main__'` block
 5. data_merger.py
+    - add new year to seasons list in `if __name__ == '__main__'` block
+    - archive data to year specific folder
 6. position_cluster.py
 7. matchup_creator.py
+    - update all years in `if __name__ == '__main__'` block
+    - archive data to year specific folder
+    - creates: gamelog_exp_clust.pkl & season2022_final_stats.pkl in 3_model_data dir

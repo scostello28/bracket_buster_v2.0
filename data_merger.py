@@ -109,7 +109,7 @@ if __name__ == '__main__':
     # - sos_csv_creator
     # - player_scraper
 
-    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
+    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
 
     gamelog_stats_filepath = "season_{}_gamelog_stats_data.pkl"
     roster_filepath = "roster_{}_data.csv"

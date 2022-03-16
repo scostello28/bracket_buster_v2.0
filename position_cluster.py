@@ -174,7 +174,7 @@ def merge_dfs(df1, df2):
 if __name__ == '__main__':
 
     source_dir = "2_full_season_data/"
-    ouput_dir = "2_full_season_data/"
+    output_dir = "2_full_season_data/"
 
     df = pd.read_pickle(f"{source_dir}/player_stats_full.pkl")
 

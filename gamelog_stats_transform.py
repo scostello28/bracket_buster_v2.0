@@ -176,7 +176,7 @@ if __name__ == '__main__':
     # - sos_csv_creator
     # - gamelog_scraper
 
-    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
+    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
 
     # Get gamelog stats
     gamelog_stats_transform(seasons, source_dir="0_scraped_data", output_dir="1_transformed_data")
