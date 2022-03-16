@@ -71,4 +71,8 @@
 9. model_test.py
     - update season in `if __name__ == '__main__'` block
     - tests models in fit models dir and prints results
-
+10. bracket_generator.py
+    - update season in `if __name__ == '__main__'` block
+    - archive past year's brackets
+    - create new iniital bracket for current season's tournament
+    - 

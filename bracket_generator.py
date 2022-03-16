@@ -10,6 +10,17 @@ import warnings
 if not sys.warnoptions:
     warnings.simplefilter("ignore")
 
+def read_bracket(bracket_path):
+    try:
+        with open(bracket_path, 'r') as f:
+            bracket = f.read()
+    except FileNotFoundError:
+        print(f'{bracket_path} does not exist' )
+        raise 
+        
+    bracket = [team.strip().strip("'") for team in bracket.split('\n') if team.strip().strip("'").find('#') < 0]
+    
+    return bracket
 
 class BracketGen:
     
@@ -175,132 +186,62 @@ class BracketGen:
 
 if __name__ == '__main__':
 
-    bracket_2021 = [
-        # WEST
-        'gonzaga',
-        'norfolk-state',
-        'oklahoma',
-        'missouri',
-        'creighton',
-        'california-santa-barbara',
-        'virginia',
-        'ohio',
-        'southern-california', 
-        'drake',
-        'kansas',
-        'eastern-washington',
-        'oregon',
-        'virginia-commonwealth', 
-        'iowa',
-        'grand-canyon',
-        # EAST
-        'michigan',
-        'texas-southern', 
-        'louisiana-state',
-        'st-bonaventure',
-        'colorado',
-        'georgetown',
-        'florida-state',
-        'north-carolina-greensboro',
-        'brigham-young',
-        'ucla', 
-        'texas',
-        'abilene-christian',
-        'connecticut',
-        'maryland',
-        'alabama',
-        'iona',
-        # SOUTH
-        'baylor',
-        'hartford',
-        'north-carolina',
-        'wisconsin',
-        'villanova',
-        'winthrop',
-        'purdue',
-        'north-texas',
-        'texas-tech',
-        'utah-state',
-        'arkansas',
-        'colgate',
-        'florida',
-        'virginia-tech',
-        'ohio-state', 
-        'oral-roberts',
-        # MIDWEST
-        'illinois',
-        'drexel',
-        'loyola-il', 
-        'georgia-tech',
-        'tennessee',
-        'oregon-state',
-        'oklahoma-state',
-        'liberty',
-        'san-diego-state',
-        'syracuse',
-        'west-virginia',
-        'morehead-state',
-        'clemson',
-        'rutgers',
-        'houston',
-        'cleveland-state'
-    ]
+    season = 2022
 
+    bracket = read_bracket(bracket_path=f"brackets/initial_bracket_{season}.txt")
 
     models = {
-        "lr": "fit_models/lr_2021_fit_model.pkl",
-        "rf": "fit_models/rf_2021_fit_model.pkl",
-        "gb": "fit_models/gb_2021_fit_model.pkl",
-        "lr_nc": "fit_models/lr_2021_fit_model_no_clust.pkl",
-        "rf_nc": "fit_models/rf_2021_fit_model_no_clust.pkl",
-        "gb_nc": "fit_models/gb_2021_fit_model_no_clust.pkl"
+        "lr": f"fit_models/lr_{season}_fit_model.pkl",
+        "rf": f"fit_models/rf_{season}_fit_model.pkl",
+        "gb": f"fit_models/gb_{season}_fit_model.pkl",
+        "lr_nc": f"fit_models/lr_{season}_fit_model_no_clust.pkl",
+        "rf_nc": f"fit_models/rf_{season}_fit_model_no_clust.pkl",
+        "gb_nc": f"fit_models/gb_{season}_fit_model_no_clust.pkl"
     }  
 
-    final_stats_df = pd.read_pickle('3_model_data/season2021_final_stats.pkl')
-    finalgames2021_data = final_stats_df[final_stats_df['GameType'] == 'season2021']
-    finalgames2021_exp_tcf = pre_matchup_feature_selection(finalgames2021_data, 'exp_tcf')
-    finalgames2021 = pre_matchup_feature_selection(finalgames2021_data, 'gamelogs')
-
-
+    final_stats_df = pd.read_pickle(f'3_model_data/season{season}_final_stats.pkl')
+    finalgames_data = final_stats_df[final_stats_df['GameType'] == f'season{season}']
+    finalgames_exp_tcf = pre_matchup_feature_selection(finalgames_data, 'exp_tcf')
+    finalgames = pre_matchup_feature_selection(finalgames_data, 'gamelogs')
 
     lr_tcf = BracketGen(
-        bracket=bracket_2021, 
+        bracket=bracket, 
         pickled_model_path=models["lr"], 
-        final_stats_df=finalgames2021_exp_tcf, 
+        final_stats_df=finalgames_exp_tcf, 
         tcf=True)
-    lr_tcf.gen_bracket(bracket_name="lr_tcf")
+    lr_tcf.gen_bracket(bracket_name=f"lr_tcf_{season}")
 
     rf_tcf = BracketGen(
-        bracket=bracket_2021, 
+        bracket=bracket, 
         pickled_model_path=models["rf"], 
-        final_stats_df=finalgames2021_exp_tcf, 
+        final_stats_df=finalgames_exp_tcf, 
         tcf=True)
-    rf_tcf.gen_bracket(bracket_name="rf_tcf")
+    rf_tcf.gen_bracket(bracket_name=f"rf_tcf_{season}")
 
     gb_tcf = BracketGen(
-        bracket=bracket_2021, 
+        bracket=bracket, 
         pickled_model_path=models["gb"], 
-        final_stats_df=finalgames2021_exp_tcf, 
+        final_stats_df=finalgames_exp_tcf, 
         tcf=True)
-    gb_tcf.gen_bracket(bracket_name="gb_tcf")
+    gb_tcf.gen_bracket(bracket_name=f"gb_tcf_{season}")
 
     lr = BracketGen(
-        bracket=bracket_2021, 
+        bracket=bracket, 
         pickled_model_path=models["lr_nc"], 
-        final_stats_df=finalgames2021, 
+        final_stats_df=finalgames, 
         tcf=False)
-    lr.gen_bracket(bracket_name="lr")
+    lr.gen_bracket(bracket_name=f"lr_{season}")
 
     rf = BracketGen(
-        bracket=bracket_2021, 
+        bracket=bracket, 
         pickled_model_path=models["rf_nc"], 
-        final_stats_df=finalgames2021, 
+        final_stats_df=finalgames, 
         tcf=False)
-    rf.gen_bracket(bracket_name="rf")
+    rf.gen_bracket(bracket_name=f"rf_{season}")
 
     gb = BracketGen(
-        bracket=bracket_2021, 
+        bracket=bracket, 
         pickled_model_path=models["gb_nc"], 
-        final_stats_df=finalgames2021, 
+        final_stats_df=finalgames, 
         tcf=False)
-    gb.gen_bracket(bracket_name="gb")
+    gb.gen_bracket(bracket_name=f"gb_{season}")
