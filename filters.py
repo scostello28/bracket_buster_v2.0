@@ -3,33 +3,37 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 from imblearn.over_sampling import SMOTE
 
-def games_up_to_2021_season_filter(df):
-    '''Filter for games up to 2021 season'''
-    notourney2021 = (df['GameType'] != 'tourney2021')
-    noseason2021 = (df['GameType'] != 'season2021')
-    games_up_to_2021_season = df[notourney2021 & noseason2021]
-    return games_up_to_2021_season
 
-def season2021_filter(df):
-    '''Filter for 2021 season games'''
-    season2021cond = (df['GameType'] == 'season2021')
-    season2021 = df[season2021cond]
-    return season2021
+def games_up_to_season_filter(df, season):
+    '''Filter for games up to given season'''
+    notourney = (df['GameType'] != f'tourney{season}')
+    noseason = (df['GameType'] != f'season{season}')
+    games_up_to_season = df[notourney & noseason]
+    return games_up_to_season
 
-def games_up_to_2021_tourney_filter(df):
-    '''Filter for games up to 2021 tourney'''
-    notourney2021 = (df['GameType'] != 'tourney2021')
-    games_up_to_2021_tourney = df[notourney2021]
-    return games_up_to_2021_tourney
+def season_filter(df, season):
+    '''Filter for given season games'''
+    season_cond = (df['GameType'] == f'season{season}')
+    season = df[season_cond]
+    return season
 
-def tourney2021_filter(df):
-    '''Filter for 2021 tourney games'''
-    tourney2021cond = (df['GameType'] == 'tourney2021')
-    tourney2021 = df[tourney2021cond]
-    return tourney2021
+def games_up_to_tourney_filter(df, season):
+    '''Filter for games up to given season tourney'''
+    notourney = (df['GameType'] != f'tourney{season}')
+    games_up_to_tourney = df[notourney]
+    return games_up_to_tourney
 
-def apply_filter(df, filter):
-    return filter(df)
+def tourney_filter(df, season):
+    '''Filter for given season tourney games'''
+    tourney_cond = (df['GameType'] == f'tourney{season}')
+    tourney = df[tourney_cond]
+    return tourney
+
+def apply_filter(df, filter, season=None):
+    if season: 
+        return filter(df, season)
+    else: 
+        return filter(df)
 
 
 def pre_matchup_feature_selection(df, feature_set='gamelogs'):
@@ -117,15 +121,19 @@ def post_merge_feature_selection(df, feature_set='gamelogs'):
     return df
 
 
-def data_for_model(df, feature_set='gamelogs', train_filter=games_up_to_2021_season_filter, test_filter=season2021_filter):
+def data_for_model(df, feature_set='gamelogs', train_filter=games_up_to_season_filter, test_filter=season_filter, season=None):
     '''
     Inputs: Model DataFrame
     Outputs: train and test DataFrames
     '''
 
     df = post_merge_feature_selection(df, feature_set=feature_set)
-    train_df = apply_filter(df, train_filter)
-    test_df = apply_filter(df, test_filter)
+    if season:
+        train_df = apply_filter(df, train_filter, season)
+        test_df = apply_filter(df, test_filter, season)
+    else:
+        train_df = apply_filter(df, train_filter)
+        test_df = apply_filter(df, test_filter)
 
     train_df = train_df.drop(['GameType'], axis=1)
     test_df = test_df.drop(['GameType'], axis=1)

@@ -38,6 +38,13 @@
 - scraping_utils.py
 - filters.py
 
+**TODO for next update**
+- Add config so only need to  update season in one place
+- add season to file names on files that need archived
+- add full update shell script
+    - archive past year files
+    - run all scripts in order
+
 **Annual Update Prcess**
 1. sos_list_scraper.py
     - add new year to seasons list in `if __name__ == '__main__'` block
@@ -58,3 +65,10 @@
     - update all years in `if __name__ == '__main__'` block
     - archive data to year specific folder
     - creates: gamelog_exp_clust.pkl & season2022_final_stats.pkl in 3_model_data dir
+8. model_dumper.py
+    - update season in `if __name__ == '__main__'` block
+    - saves models in fit_models dir
+9. model_test.py
+    - update season in `if __name__ == '__main__'` block
+    - tests models in fit models dir and prints results
+
