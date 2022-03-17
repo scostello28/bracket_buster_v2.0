@@ -45,6 +45,14 @@
     - archive past year files
     - run all scripts in order
 
+**TODO**
+- Save final brackets from each tourney
+- Create a testing framework to see which models are best
+    - for full bracket 
+    - for each round
+        - ie. is tcf better in early rounds?
+        - Can I create some ensemble of these models for better performace?
+
 **Annual Update Prcess**
 1. sos_list_scraper.py
     - add new year to seasons list in `if __name__ == '__main__'` block
