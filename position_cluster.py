@@ -201,8 +201,10 @@ if __name__ == '__main__':
 
     # Sum Position cluster minutes played by Team and Season
     team_clusters_df = team_and_season_mp_by_cluster(players_df)
+    print(f"{output_dir}/team_clusters.pkl")
     team_clusters_df.to_pickle(f"{output_dir}/team_clusters.pkl")
 
     # Create Team Experience Level DataFrame
     team_experience_df = team_and_season_mp_by_class(df)
+    print(f"{output_dir}/team_experience.pkl")
     team_experience_df.to_pickle(f"{output_dir}/team_experience.pkl")

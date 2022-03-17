@@ -19,6 +19,7 @@ def read_bracket(bracket_path):
         raise 
         
     bracket = [team.strip().strip("'") for team in bracket.split('\n') if team.strip().strip("'").find('#') < 0]
+    print(bracket)
     
     return bracket
 
@@ -85,6 +86,8 @@ class BracketGen:
     @staticmethod
     def game_predict(model, matchup, matchup_reversed, team1, team2):
         '''Predict on matchup'''
+        # print(f'matchup: {matchup}')
+        print(f'{team1} vs {team2}')
         prob = model.predict_proba(matchup)
         prob_reversed = model.predict_proba(matchup_reversed)
         team1_prob = (prob[0][1] + prob_reversed[0][0]) / 2 * 100

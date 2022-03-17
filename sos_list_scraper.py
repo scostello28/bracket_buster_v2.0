@@ -26,7 +26,7 @@ def sos_csv_creator(seasons, output_dir="0_scraped_data"):
     sos_base_url = "https://www.sports-reference.com/cbb/seasons/{season}-school-stats.html#basic_school_stats::none"
 
     dir_files = os.listdir(output_dir)
-    print(dir_files)
+    # print(dir_files)
 
     for season in seasons:
 
