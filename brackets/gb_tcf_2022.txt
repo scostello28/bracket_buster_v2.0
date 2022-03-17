@@ -16,7 +16,7 @@ texas v virginia-tech
 purdue v yale
 murray-state v san-francisco
 kentucky v saint-peters
-arizona v bryant
+arizona v wright-state
 seton-hall v texas-christian
 houston v alabama-birmingham
 illinois v chattanooga
@@ -42,49 +42,49 @@ notre-dame v texas-tech
 davidson v duke
 baylor v north-carolina
 saint-marys-ca v ucla
-virginia-tech v purdue
+texas v purdue
 san-francisco v kentucky
-arizona v texas-christian
+arizona v seton-hall
 houston v illinois
 colorado-state v tennessee
 loyola-il v villanova
 kansas v san-diego-state
 iowa v providence
-iowa-state v wisconsin
+louisiana-state v wisconsin
 southern-california v auburn
 
 
 Sweet 16
 -------
-gonzaga v arkansas
-texas-tech v duke
-baylor v saint-marys-ca
+boise-state v arkansas
+texas-tech v davidson
+baylor v ucla
 purdue v kentucky
 arizona v houston
-colorado-state v loyola-il
+colorado-state v villanova
 kansas v providence
 wisconsin v southern-california
 
 
 Elite 8
 -------
-gonzaga v duke
-saint-marys-ca v kentucky
-arizona v loyola-il
+arkansas v davidson
+ucla v kentucky
+houston v colorado-state
 providence v southern-california
 
 
 Final4
 ------
-gonzaga v kentucky
-arizona v providence
+davidson v kentucky
+colorado-state v providence
 
 
 Championship
 ------------
-gonzaga v arizona
+davidson v providence
 
 
 Champion
 --------
-arizona
+providence

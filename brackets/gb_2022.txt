@@ -16,7 +16,7 @@ texas v virginia-tech
 purdue v yale
 murray-state v san-francisco
 kentucky v saint-peters
-arizona v bryant
+arizona v wright-state
 seton-hall v texas-christian
 houston v alabama-birmingham
 illinois v chattanooga
@@ -42,15 +42,15 @@ notre-dame v texas-tech
 davidson v duke
 baylor v north-carolina
 saint-marys-ca v ucla
-texas v purdue
+virginia-tech v purdue
 san-francisco v kentucky
-arizona v seton-hall
+arizona v texas-christian
 houston v illinois
 colorado-state v tennessee
 loyola-il v villanova
 kansas v san-diego-state
 iowa v providence
-louisiana-state v wisconsin
+iowa-state v wisconsin
 southern-california v auburn
 
 
@@ -82,9 +82,9 @@ arizona v auburn
 
 Championship
 ------------
-gonzaga v arizona
+gonzaga v auburn
 
 
 Champion
 --------
-arizona
+auburn

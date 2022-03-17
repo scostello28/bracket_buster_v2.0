@@ -34,7 +34,7 @@ kentucky
 saint-peters
 # SOUTH
 arizona
-bryant
+wright-state
 seton-hall
 texas-christian
 houston

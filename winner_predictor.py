@@ -65,6 +65,26 @@ def game_predict(model, matchup, matchup_reversed):
         print('{} has {}% chance to win.'.format(team1, int(round(team1_prob))))
         print('{} has {}% chance to win.'.format(team2, int(round(team2_prob))))
 
+def make_prediction(pickled_model, pickled_model_exp_tcf, final_games, finalgames_exp_tcf):
+    with open(pickled_model, 'rb') as f:
+        model = pickle.load(f)
+
+    with open(pickled_model_exp_tcf, 'rb') as f_exp_tcf:
+        model_exp_tcf = pickle.load(f_exp_tcf)
+
+    team1 = str(input('team1: '))
+    team2 = str(input('team2: '))
+
+    print('\n')
+    print('w/o TCF')
+    matchup = merge(finalgames, team1, team2, tcf=False)
+    matchup_reversed = merge(finalgames, team2, team1, tcf=False)
+    game_predict(model, matchup, matchup_reversed)
+    print('\n')
+    print('w/ TCF')
+    matchup_exp_tcf = merge(finalgames_exp_tcf, team1, team2, tcf=True)
+    matchup_exp_tcf_reversed = merge(finalgames_exp_tcf, team2, team1, tcf=True)
+    game_predict(model_exp_tcf, matchup_exp_tcf, matchup_exp_tcf_reversed)
 
 if __name__ == '__main__':
 
@@ -85,6 +105,9 @@ if __name__ == '__main__':
 
     pickled_model = gb_model
     pickled_model_exp_tcf = gb_model_exp_tcf
+
+    # for model, model_exp_tcf in [(lr_model, lr_model_exp_tcf), (rf_model, rf_model_exp_tcf), (gb_model, gb_model_exp_tcf)]:
+    #     make_prediction(model, model_exp_tcf, finalgames, finalgames_exp_tcf)
 
     with open(pickled_model, 'rb') as f:
         model = pickle.load(f)
