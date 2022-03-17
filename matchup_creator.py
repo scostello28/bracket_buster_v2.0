@@ -125,12 +125,14 @@ if __name__ == "__main__":
     transformed_data = "1_transformed_data"
     full_season_data = "2_full_season_data"
 
-    # Read in gamelog, 2021 final stats, experience and cluster data
-    final_stats_2021_df = pd.read_pickle(f"{transformed_data}/season_2021_gamelog_final_stats_data.pkl")
+    season = 2022
+
+    # Read in gamelog, 2022 final stats, experience and cluster data
+    final_stats_df = pd.read_pickle(f"{transformed_data}/season_{season}_gamelog_final_stats_data.pkl")
     gamelog_df = pd.read_pickle(f"{full_season_data}/season_full_gamelog_stats_data.pkl")
     team_experience_df = pd.read_pickle(f"{full_season_data}/team_experience.pkl")
     team_clusters_df = pd.read_pickle(f"{full_season_data}/team_clusters.pkl")
 
-    # Matchups for modeling from Gamelog, 2021 final stats, experience and cluster data.
+    # Matchups for modeling from Gamelog, 2022 final stats, experience and cluster data.
     gamelog_experience_cluster_merge(gamelog_df, team_experience_df, team_clusters_df)
-    final_stats_experience_cluster_merge(final_stats_2021_df, team_experience_df, team_clusters_df, season=2021)
+    final_stats_experience_cluster_merge(final_stats_df, team_experience_df, team_clusters_df, season=season)

@@ -61,6 +61,11 @@ def add_game_type(row):
     tourney2021start = date(2021,3,17)
     tourney2021end = date(2021,4,2)
 
+    season2022start = date(2021,4,3)
+    season2022end = date(2022,3,16)
+    tourney2022start = date(2022,3,17)
+    tourney2022end = date(2022,4,5)
+
 
     if row['just_date'] >= tourney2014start and row['just_date'] <= tourney2014end:
         row['GameType'] = 'tourney2014'
@@ -109,6 +114,12 @@ def add_game_type(row):
 
     elif row['just_date'] >= season2021start and row['just_date'] <= season2021end:
         row['GameType'] = 'season2021'
+
+    elif row['just_date'] >= tourney2022start and row['just_date'] <= tourney2022end:
+        row['GameType'] = 'tourney2022'
+
+    elif row['just_date'] >= season2022start and row['just_date'] <= season2022end:
+        row['GameType'] = 'season2022'
 
     else:
         row['GameType'] = 'season'
@@ -249,7 +260,7 @@ if __name__ == '__main__':
 
     """sos_csv_creator needs to be run if this file is not already created"""
 
-    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
+    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
 
     """Get full season gamelog data for all teams over all seasons"""
     gamelog_scraper(seasons)

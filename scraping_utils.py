@@ -27,6 +27,8 @@ def school_name_transform(school_name):
             school_name = "california-riverside"
         elif school_name == "uc-santa-barbara":
             school_name = "california-santa-barbara"
+        elif school_name == "uc-san-diego":
+            school_name = "california-san-diego"
         elif school_name == "university-of-california":
             school_name = "california"
         elif school_name == "cal-state-long-beach":
@@ -73,6 +75,10 @@ def school_name_transform(school_name):
             school_name = "north-carolina-wilmington" 
         elif school_name == "ucf":
             school_name = "central-florida" 
+        elif school_name == "uab":
+            school_name = "alabama-birmingham"
+        elif school_name == "the-citadel":
+            school_name = "citadel"
         elif school_name == "ucsb":
             school_name = "california-santa-barbara"
         elif school_name == "uconn":
@@ -85,6 +91,8 @@ def school_name_transform(school_name):
             school_name = "texas-el-paso"
         elif school_name == "utsa":
             school_name = "texas-san-antonio"
+        elif school_name == "ut-arlington":
+            school_name = "texas-arlington"
         elif school_name == "usc":
             school_name = "nsouthern-california"
         elif school_name == "vcu":

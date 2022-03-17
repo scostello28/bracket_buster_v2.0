@@ -65,24 +65,49 @@ def game_predict(model, matchup, matchup_reversed):
         print('{} has {}% chance to win.'.format(team1, int(round(team1_prob))))
         print('{} has {}% chance to win.'.format(team2, int(round(team2_prob))))
 
+def make_prediction(pickled_model, pickled_model_exp_tcf, final_games, finalgames_exp_tcf):
+    with open(pickled_model, 'rb') as f:
+        model = pickle.load(f)
+
+    with open(pickled_model_exp_tcf, 'rb') as f_exp_tcf:
+        model_exp_tcf = pickle.load(f_exp_tcf)
+
+    team1 = str(input('team1: '))
+    team2 = str(input('team2: '))
+
+    print('\n')
+    print('w/o TCF')
+    matchup = merge(finalgames, team1, team2, tcf=False)
+    matchup_reversed = merge(finalgames, team2, team1, tcf=False)
+    game_predict(model, matchup, matchup_reversed)
+    print('\n')
+    print('w/ TCF')
+    matchup_exp_tcf = merge(finalgames_exp_tcf, team1, team2, tcf=True)
+    matchup_exp_tcf_reversed = merge(finalgames_exp_tcf, team2, team1, tcf=True)
+    game_predict(model_exp_tcf, matchup_exp_tcf, matchup_exp_tcf_reversed)
 
 if __name__ == '__main__':
 
-    final_stats_df = pd.read_pickle('3_model_data/season2021_final_stats.pkl')
-    finalgames2021_data = final_stats_df[final_stats_df['GameType'] == 'season2021']
-    finalgames2021 = pre_matchup_feature_selection(finalgames2021_data, 'gamelogs')
-    finalgames2021_exp_tcf = pre_matchup_feature_selection(finalgames2021_data, 'exp_tcf')
+    season = 2022
 
-    lr_model = 'fit_models/lr_2021_fit_model_no_clust.pkl'
-    rf_model = 'fit_models/rf_2021_fit_model_no_clust.pkl'
-    gb_model = 'fit_models/gb_2021_fit_model_no_clust.pkl'
+    final_stats_df = pd.read_pickle(f'3_model_data/season{season}_final_stats.pkl')
+    finalgames_data = final_stats_df[final_stats_df['GameType'] == f'season{season}']
+    finalgames = pre_matchup_feature_selection(finalgames_data, 'gamelogs')
+    finalgames_exp_tcf = pre_matchup_feature_selection(finalgames_data, 'exp_tcf')
 
-    lr_model_exp_tcf = 'fit_models/lr_2021_fit_model.pkl'
-    rf_model_exp_tcf = 'fit_models/rf_2021_fit_model.pkl'
-    gb_model_exp_tcf = 'fit_models/gb_2021_fit_model.pkl'
+    lr_model = f'fit_models/lr_{season}_fit_model_no_clust.pkl'
+    rf_model = f'fit_models/rf_{season}_fit_model_no_clust.pkl'
+    gb_model = f'fit_models/gb_{season}_fit_model_no_clust.pkl'
+
+    lr_model_exp_tcf = f'fit_models/lr_{season}_fit_model.pkl'
+    rf_model_exp_tcf = f'fit_models/rf_{season}_fit_model.pkl'
+    gb_model_exp_tcf = f'fit_models/gb_{season}_fit_model.pkl'
 
     pickled_model = gb_model
     pickled_model_exp_tcf = gb_model_exp_tcf
+
+    # for model, model_exp_tcf in [(lr_model, lr_model_exp_tcf), (rf_model, rf_model_exp_tcf), (gb_model, gb_model_exp_tcf)]:
+    #     make_prediction(model, model_exp_tcf, finalgames, finalgames_exp_tcf)
 
     with open(pickled_model, 'rb') as f:
         model = pickle.load(f)
@@ -95,11 +120,11 @@ if __name__ == '__main__':
 
     print('\n')
     print('w/o TCF')
-    matchup = merge(finalgames2021, team1, team2, tcf=False)
-    matchup_reversed = merge(finalgames2021, team2, team1, tcf=False)
+    matchup = merge(finalgames, team1, team2, tcf=False)
+    matchup_reversed = merge(finalgames, team2, team1, tcf=False)
     game_predict(model, matchup, matchup_reversed)
     print('\n')
     print('w/ TCF')
-    matchup_exp_tcf = merge(finalgames2021_exp_tcf, team1, team2, tcf=True)
-    matchup_exp_tcf_reversed = merge(finalgames2021_exp_tcf, team2, team1, tcf=True)
+    matchup_exp_tcf = merge(finalgames_exp_tcf, team1, team2, tcf=True)
+    matchup_exp_tcf_reversed = merge(finalgames_exp_tcf, team2, team1, tcf=True)
     game_predict(model_exp_tcf, matchup_exp_tcf, matchup_exp_tcf_reversed)

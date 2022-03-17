@@ -26,7 +26,7 @@ def sos_csv_creator(seasons, output_dir="0_scraped_data"):
     sos_base_url = "https://www.sports-reference.com/cbb/seasons/{season}-school-stats.html#basic_school_stats::none"
 
     dir_files = os.listdir(output_dir)
-    print(dir_files)
+    # print(dir_files)
 
     for season in seasons:
 
@@ -82,7 +82,7 @@ def sos_csv_creator(seasons, output_dir="0_scraped_data"):
 
 if __name__ == "__main__":
 
-    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
+    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
     # windows = [5]
 
     """Get strength of schedule and team list data"""
