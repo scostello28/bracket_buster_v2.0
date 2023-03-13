@@ -41,6 +41,13 @@
 **TODO for next update**
 - Add config so only need to  update season in one place
 - add season to file names on files that need archived
+    - player_per100_full_date.pkl
+    - player_stats_full.pkl
+    - rostaer_full_data.csv
+    - season-full_game_log_stats_data.pkl
+    - team_clusters.pkl
+    - team_experience.pkl
+    - exp_gamelog_clust
 - add full update shell script
     - archive past year files
     - run all scripts in order
