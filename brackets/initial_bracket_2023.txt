@@ -1,0 +1,68 @@
+# WEST
+kansas
+howard
+arkansas
+illinois
+saint-marys-ca
+virginia-commonwealth
+connecticut
+iona
+texas-christian
+TBD #
+gonzaga
+grand-canyon
+northwestern
+boise-state
+ucla
+north-carolina-ashville
+# EAST
+purdue
+TBD #
+memphis
+florida-atlantic
+duke
+oral-roberts
+tennessee
+louisiana-lafayette
+kentucky
+providence
+kansas-state
+montana-state
+michigan-state
+southern-california
+marquette
+vermont
+# SOUTH
+alabama
+TBD #
+maryland
+west-virginia
+san-diego-state
+charleston
+virginia
+furman
+creighton
+north-carolina-state
+baylor
+california-santa-barbara
+missouri
+utah-state
+arizona
+princeton
+# MIDWEST
+houston
+northern-kentucky
+iowa
+auburn
+miami-fl
+drake
+indiana
+kent-state
+iowa-state
+TBD #
+xavier
+kennesaw-state
+texas-am
+penn-state
+texas
+colgate
