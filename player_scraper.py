@@ -73,6 +73,8 @@ def roster_scraper(seasons, source_dir, output_dir, verbose=False):
                 '''Add df to roster_df'''
                 roster_df = roster_df.append(df, ignore_index=True)
 
+            time.sleep(10)
+
         print(f"Saving {season_filename}")
         roster_df.to_csv(f"{output_dir}/{season_filename}")
 
