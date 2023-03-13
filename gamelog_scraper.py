@@ -260,6 +260,8 @@ def gamelog_scraper(seasons, output_dir="0_scraped_data"):
             else:
                 """Add df to games_df"""
                 season_df = season_df.append(df, ignore_index=True)
+
+            time.sleep(30)
         
         print(f"Saving {season_filename}")
         season_df.to_pickle(f"{output_dir}/{season_filename}")
