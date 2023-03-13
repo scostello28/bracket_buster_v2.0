@@ -1,6 +1,16 @@
 import pandas as pd
 import os
 
+def read_seasons(seasons_path):
+    try:
+        with open(seasons_path, 'r') as f:
+            seasons = f.read()
+    except FileNotFoundError:
+        print(f'{seasons_path} does not exist' )
+        raise 
+
+    return seasons.split('\n')
+
 def school_name_transform(school_name):
     try:
 

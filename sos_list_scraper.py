@@ -82,7 +82,8 @@ def sos_csv_creator(seasons, output_dir="0_scraped_data"):
 
 if __name__ == "__main__":
 
-    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+    # seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+    seasons = read_seasons(seasons_path='seasons_list.txt')
     # windows = [5]
 
     """Get strength of schedule and team list data"""
