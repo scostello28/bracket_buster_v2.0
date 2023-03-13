@@ -205,6 +205,9 @@ def clean_team_gamelog(df, team, sos_season_dict):
 
 def gamelog_scraper(seasons, output_dir="0_scraped_data"):
     """
+    Bot/Scraping/Crawler Traffic on Sports-Reference.com Sites
+    https://www.sports-reference.com/bot-traffic.html
+
     Inputs:
         team = team (formatted as in url)
         season = season year
@@ -261,7 +264,7 @@ def gamelog_scraper(seasons, output_dir="0_scraped_data"):
                 """Add df to games_df"""
                 season_df = season_df.append(df, ignore_index=True)
 
-            time.sleep(30)
+            time.sleep(10)
         
         print(f"Saving {season_filename}")
         season_df.to_pickle(f"{output_dir}/{season_filename}")
