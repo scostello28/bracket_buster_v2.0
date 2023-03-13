@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from datetime import date
 from urllib.error import HTTPError
 
-from scraping_utils import school_name_transform, team_list, teams_dict, sos_dict_creator, check_for_file
+from scraping_utils import school_name_transform, team_list, teams_dict, sos_dict_creator, check_for_file, read_seasons
 
 
 def add_game_type(row):
@@ -66,6 +66,11 @@ def add_game_type(row):
     tourney2022start = date(2022,3,17)
     tourney2022end = date(2022,4,5)
 
+    season2023start = date(2022,4,6)
+    season2023end = date(2023,3,16)
+    tourney2023start = date(2023,3,15)
+    tourney2023end = date(2023,4,5)
+
 
     if row['just_date'] >= tourney2014start and row['just_date'] <= tourney2014end:
         row['GameType'] = 'tourney2014'
@@ -120,6 +125,12 @@ def add_game_type(row):
 
     elif row['just_date'] >= season2022start and row['just_date'] <= season2022end:
         row['GameType'] = 'season2022'
+
+    elif row['just_date'] >= tourney2023start and row['just_date'] <= tourney2023end:
+        row['GameType'] = 'tourney2023'
+
+    elif row['just_date'] >= season2023start and row['just_date'] <= season2023end:
+        row['GameType'] = 'season2023'
 
     else:
         row['GameType'] = 'season'
@@ -260,7 +271,8 @@ if __name__ == '__main__':
 
     """sos_csv_creator needs to be run if this file is not already created"""
 
-    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+    # seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+    seasons = read_seasons(seasons_path='seasons_list.txt')
 
     """Get full season gamelog data for all teams over all seasons"""
     gamelog_scraper(seasons)

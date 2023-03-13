@@ -7,7 +7,7 @@ import time
 from bs4 import BeautifulSoup
 from datetime import date
 
-from scraping_utils import school_name_transform, check_for_file
+from scraping_utils import school_name_transform, check_for_file, read_seasons
 
 def clean_team(row):
     if "NCAA" in row['school']:
