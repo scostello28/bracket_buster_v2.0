@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from datetime import date
 from urllib.error import HTTPError
 
-from scraping_utils import school_name_transform, team_list, teams_dict, sos_dict_creator, check_for_file
+from scraping_utils import school_name_transform, team_list, teams_dict, sos_dict_creator, check_for_file, read_seasons
 
 
 def roster_scraper(seasons, source_dir, output_dir, verbose=False):
@@ -235,7 +235,8 @@ if __name__ == '__main__':
     # Dependencies:
     # - sos_csv_creator
 
-    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+    # seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+    seasons = read_seasons(seasons_path='seasons_list.txt')
 
     roster_scraper(seasons, source_dir="0_scraped_data", output_dir="0_scraped_data")
 

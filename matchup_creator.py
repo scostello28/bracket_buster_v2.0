@@ -1,7 +1,7 @@
 import pandas as pd
 import pickle
 
-from scraping_utils import check_for_file
+from scraping_utils import check_for_file, read_seasons
 
 
 def gamelog_experience_cluster_merge(gamelog_df, experience_df, cluster_df):
@@ -125,14 +125,15 @@ if __name__ == "__main__":
     transformed_data = "1_transformed_data"
     full_season_data = "2_full_season_data"
 
-    season = 2022
+    # season = 2022
+    season = read_seasons(seasons_path='seasons_list.txt')[-1]
 
-    # Read in gamelog, 2022 final stats, experience and cluster data
+    # Read in gamelog, 2023 final stats, experience and cluster data
     final_stats_df = pd.read_pickle(f"{transformed_data}/season_{season}_gamelog_final_stats_data.pkl")
     gamelog_df = pd.read_pickle(f"{full_season_data}/season_full_gamelog_stats_data.pkl")
     team_experience_df = pd.read_pickle(f"{full_season_data}/team_experience.pkl")
     team_clusters_df = pd.read_pickle(f"{full_season_data}/team_clusters.pkl")
 
-    # Matchups for modeling from Gamelog, 2022 final stats, experience and cluster data.
+    # Matchups for modeling from Gamelog, 20223final stats, experience and cluster data.
     gamelog_experience_cluster_merge(gamelog_df, team_experience_df, team_clusters_df)
     final_stats_experience_cluster_merge(final_stats_df, team_experience_df, team_clusters_df, season=season)

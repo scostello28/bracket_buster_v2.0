@@ -1,7 +1,7 @@
 import pandas as pd
 import pickle
 
-from scraping_utils import school_name_transform, team_list, teams_dict, sos_dict_creator, check_for_file
+from scraping_utils import school_name_transform, team_list, teams_dict, sos_dict_creator, check_for_file, read_seasons
 
 def lag_columns(df, cols_to_shift):
     """
@@ -176,7 +176,8 @@ if __name__ == '__main__':
     # - sos_csv_creator
     # - gamelog_scraper
 
-    seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+    # seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+    seasons = read_seasons(seasons_path='seasons_list.txt')
 
     # Get gamelog stats
     gamelog_stats_transform(seasons, source_dir="0_scraped_data", output_dir="1_transformed_data")
