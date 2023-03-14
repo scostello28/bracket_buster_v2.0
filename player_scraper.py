@@ -110,7 +110,15 @@ def player_per100_scraper(seasons, source_dir, output_dir):
                 '''URL for data pull'''
                 url = 'https://www.sports-reference.com/cbb/schools/{}/{}.html#per_poss'.format(team, season)
                 
-                df = pd.read_html(url)[11]
+                # df = pd.read_html(url)[11]
+
+                try:
+                    df = pd.read_html(url)[11]
+                except IndexError as index_error:
+                    print(index_error)
+                    print(url)
+                    print("Index is out of range try alternate table index as team may not have conference stats")
+                    df = pd.read_html(url)[6]
                 
                 # Drop uneeded columns
                 df = df.drop(['Rk', 'Unnamed: 24'], axis=1)
@@ -130,6 +138,8 @@ def player_per100_scraper(seasons, source_dir, output_dir):
             else:
                 # Add individual player stats to full per_poss DataFrame
                 player_per100_df = player_per100_df.append(df, ignore_index=True)
+
+            time.sleep(5)
 
         # Filter out irrelevant columns
         cols = ['Player', 'G', 'GS', 'MP',
@@ -240,6 +250,6 @@ if __name__ == '__main__':
     # seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
     seasons = read_seasons(seasons_path='seasons_list.txt')
 
-    roster_scraper(seasons, source_dir="0_scraped_data", output_dir="0_scraped_data")
+    roster_scraper(seasons, source_dir="0_scraped_data", output_dir="0_scraped_data", verbose=True)
 
     player_per100_scraper(seasons, source_dir="0_scraped_data", output_dir="0_scraped_data")
