@@ -89,6 +89,9 @@ def gamelog_stats_transform(seasons, source_dir, output_dir, window=5, lag=True,
 
         df = pd.read_pickle(source_dir + "/" + gamelog_season_filename)
 
+        # in 2023 some of the stats included NaN
+        df = df[df['W'].notna()].copy()
+
         try:
             if verbose:
                 """Print for progress update"""
@@ -176,7 +179,6 @@ if __name__ == '__main__':
     # - sos_csv_creator
     # - gamelog_scraper
 
-    # seasons = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
     seasons = read_seasons(seasons_path='seasons_list.txt')
 
     # Get gamelog stats
