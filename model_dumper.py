@@ -3,18 +3,10 @@ import pandas as pd
 import numpy as np
 
 from sklearn.pipeline import Pipeline
-# from sklearn.model_selection import train_test_split
-# from sklearn.model_selection import GridSearchCV
-# from sklearn import metrics
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-# from sklearn.svm import SVC
 from imblearn.over_sampling import SMOTE
-# from keras.models import Sequential
-# from keras.layers.core import Dense, Dropout
-# from keras.optimizers import SGD
-# import theano
 from filters import games_up_to_tourney_filter, tourney_filter, games_up_to_tourney_filter, data_for_model, set_up_data
 from scraping_utils import check_for_file, read_seasons
 
@@ -97,10 +89,10 @@ def gb_model(X, y, model_name):
 
 if __name__ == "__main__":
 
-    source_dir = "3_model_data"
-    data = pd.read_pickle(f"{source_dir}/gamelog_exp_clust.pkl")
-    # season = 2022
     season = read_seasons(seasons_path='seasons_list.txt')[-1]
+
+    source_dir = "3_model_data"
+    data = pd.read_pickle(f"{source_dir}/gamelog_exp_clust-{season}.pkl")
 
     # test models
     Xy_train_t, Xy_test_t = data_for_model(data, feature_set='exp_tcf', season=season)

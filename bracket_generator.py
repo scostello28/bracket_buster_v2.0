@@ -2,7 +2,7 @@ import pickle
 import pandas as pd
 import numpy as np
 from filters import pre_matchup_feature_selection
-from scraping_utils import check_for_file
+from scraping_utils import check_for_file, read_seasons
 
 import sys
 import warnings
@@ -189,7 +189,7 @@ class BracketGen:
 
 if __name__ == '__main__':
 
-    season = 2022
+    season = read_seasons(seasons_path='seasons_list.txt')[-1]
 
     bracket = read_bracket(bracket_path=f"brackets/initial_bracket_{season}.txt")
 

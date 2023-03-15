@@ -1,0 +1,28 @@
+--------------------------
+Model: lr_2023_fit_model_testing
+Accuracy: 0.680426
+
+
+--------------------------
+Model: rf_2023_fit_model_testing
+Accuracy: 0.673169
+
+
+--------------------------
+Model: gb_2023_fit_model_testing
+Accuracy: 0.676344
+
+
+--------------------------
+Model: lr_2023_fit_model_no_clust_testing
+Accuracy: 0.678839
+
+
+--------------------------
+Model: rf_2023_fit_model_no_clust_testing
+Accuracy: 0.677932
+
+
+--------------------------
+Model: gb_2023_fit_model_no_clust_testing
+Accuracy: 0.675890

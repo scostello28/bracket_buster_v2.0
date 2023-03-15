@@ -2,6 +2,7 @@ import pickle
 import pandas as pd
 import numpy as np
 from filters import pre_matchup_feature_selection
+from scraping_utils import read_seasons
 
 import sys
 import warnings
@@ -88,7 +89,7 @@ def make_prediction(pickled_model, pickled_model_exp_tcf, final_games, finalgame
 
 if __name__ == '__main__':
 
-    season = 2022
+    season = read_seasons(seasons_path='seasons_list.txt')[-1]
 
     final_stats_df = pd.read_pickle(f'3_model_data/season{season}_final_stats.pkl')
     finalgames_data = final_stats_df[final_stats_df['GameType'] == f'season{season}']

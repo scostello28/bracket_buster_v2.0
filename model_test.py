@@ -6,14 +6,14 @@ from sklearn import metrics
 from sklearn.model_selection import cross_val_score as cvs
 
 from filters import games_up_to_tourney_filter, tourney_filter, games_up_to_tourney_filter, data_for_model, set_up_data
-from scraping_utils import check_for_file
+from scraping_utils import check_for_file, read_seasons
 
 
 if __name__ == "__main__":
 
+    season = read_seasons(seasons_path='seasons_list.txt')[-1]
     source_dir = "3_model_data"
-    data = pd.read_pickle(f"{source_dir}/gamelog_exp_clust.pkl")
-    season = 2022
+    data = pd.read_pickle(f"{source_dir}/gamelog_exp_clust-{season}.pkl")
 
     # test models
     Xy_train, Xy_test = data_for_model(data, feature_set='exp_tcf', season=season)

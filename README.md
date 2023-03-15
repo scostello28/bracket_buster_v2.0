@@ -79,18 +79,22 @@
 6. `data_merger.py`
     - Manual: archive data to year specific folder
     - saves files to `2_full_season_data` dir
-        - `player_per100_full_data.pkl`
-        - `roster_full_data.csv`
-        - `season_full_gamelog_stats_data.pkl`
-        - `player_stats_full.pkl`
+        - `player_per100_full-{season}_data.pkl`
+        - `roster_full-{season}_data.csv`
+        - `season_full-{season}_gamelog_stats_data.pkl`
+        - `player_stats_full-{season}.pkl`
 7. `position_cluster.py`
     - saves files to `2_full_season_data` dir
-        - `team_clusters.pkl`
-        - `team_experience.pkl`
+        - `team_clusters-{season}.pkl`
+        - `team_experience-{season}.pkl`
 8. `matchup_creator.py`
     - Manual: archive data to year specific folder
-    - creates: `gamelog_exp_clust.pkl` & `season{season}_final_stats.pkl` in `3_model_data` dir
+    - creates: `gamelog_exp_clust-{season}.pkl` & `season{season}_final_stats.pkl` in `3_model_data` dir
 9. `model_dumper.py`
+    - Manual: archive fit models to year specific folder
+    - trains logistic regression, random forest and gradient boosting models for testing and prediction
+        - testing models are trained on all data up to the current season and tested on the current season to assess model hyperparameter performance
+        - prtion models are traind on the current season with optimal hyperparameters for use in bracket creation
     - saves models in `fit_models` dir
 10. `model_test.py`
     - update season in `if __name__ == '__main__'` block
