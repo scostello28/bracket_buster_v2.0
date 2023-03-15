@@ -102,6 +102,8 @@ def player_per100_scraper(seasons, source_dir, output_dir):
         if check_for_file(directory=output_dir, filename=season_filename):
             continue
 
+        team_counter = 0
+
         for team in teams:
             try:
                 '''Print for progress update'''
@@ -139,7 +141,12 @@ def player_per100_scraper(seasons, source_dir, output_dir):
                 # Add individual player stats to full per_poss DataFrame
                 player_per100_df = player_per100_df.append(df, ignore_index=True)
 
-            time.sleep(5)
+            team_counter += 1
+            if team_counter == 10:
+                time.sleep(10)
+                team_counter = 0
+            else:
+                time.sleep(5)
 
         # Filter out irrelevant columns
         cols = ['Player', 'G', 'GS', 'MP',
