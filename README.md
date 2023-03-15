@@ -56,6 +56,7 @@
 - Save final brackets from each tourney
 - vectorize height data in data merger player_roster_merger func
 - fill missing height data in rosters instead of dropping all wiht NaNs 
+- create archiving script to move all yearly data files to respective archive folders
 - Create a testing framework to see which models are best
     - for full bracket 
     - for each round
@@ -87,7 +88,7 @@
         - `team_clusters.pkl`
         - `team_experience.pkl`
 8. `matchup_creator.py`
-    - archive data to year specific folder
+    - Manual: archive data to year specific folder
     - creates: `gamelog_exp_clust.pkl` & `season{season}_final_stats.pkl` in `3_model_data` dir
 9. `model_dumper.py`
     - saves models in `fit_models` dir

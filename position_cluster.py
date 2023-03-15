@@ -5,6 +5,8 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 import pdb
 
+from scraping_utils import check_for_file, read_seasons
+
 
 '''Functions'''
 def guards(df):
@@ -173,10 +175,11 @@ def merge_dfs(df1, df2):
 
 if __name__ == '__main__':
 
-    source_dir = "2_full_season_data/"
-    output_dir = "2_full_season_data/"
+    source_dir = "2_full_season_data"
+    output_dir = "2_full_season_data"
 
-    df = pd.read_pickle(f"{source_dir}/player_stats_full.pkl")
+    season = read_seasons(seasons_path='seasons_list.txt')[-1]
+    df = pd.read_pickle(f"{source_dir}/player_stats_full-{season}.pkl")
 
     # Create DataFrames by position ready for clustering
     centers_df, forwards_df, guards_df = pos_dfs(df)
@@ -201,10 +204,10 @@ if __name__ == '__main__':
 
     # Sum Position cluster minutes played by Team and Season
     team_clusters_df = team_and_season_mp_by_cluster(players_df)
-    print(f"{output_dir}/team_clusters.pkl")
-    team_clusters_df.to_pickle(f"{output_dir}/team_clusters.pkl")
+    print(f"{output_dir}/team_clusters-{season}.pkl")
+    team_clusters_df.to_pickle(f"{output_dir}/team_clusters-{season}.pkl")
 
     # Create Team Experience Level DataFrame
     team_experience_df = team_and_season_mp_by_class(df)
-    print(f"{output_dir}/team_experience.pkl")
-    team_experience_df.to_pickle(f"{output_dir}/team_experience.pkl")
+    print(f"{output_dir}/team_experience-{season}.pkl")
+    team_experience_df.to_pickle(f"{output_dir}/team_experience-{season}.pkl")

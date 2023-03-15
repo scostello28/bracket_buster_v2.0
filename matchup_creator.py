@@ -4,13 +4,13 @@ import pickle
 from scraping_utils import check_for_file, read_seasons
 
 
-def gamelog_experience_cluster_merge(gamelog_df, experience_df, cluster_df):
+def gamelog_experience_cluster_merge(gamelog_df, experience_df, cluster_df, season):
     '''
     INPUT: Gamelog DataFrame and experience DataFrame
     OUTPUT: DataFrame with matching IDs merged to same row (1 game per row!)
     '''
     output_dir = "3_model_data"
-    output_file_name = "gamelog_exp_clust.pkl"
+    output_file_name = f"gamelog_exp_clust-{season}.pkl"
 
     if check_for_file(directory=output_dir, filename=output_file_name):
         return
@@ -125,15 +125,14 @@ if __name__ == "__main__":
     transformed_data = "1_transformed_data"
     full_season_data = "2_full_season_data"
 
-    # season = 2022
     season = read_seasons(seasons_path='seasons_list.txt')[-1]
 
-    # Read in gamelog, 2023 final stats, experience and cluster data
+    # Read in gamelog, current year final stats, experience and cluster data
     final_stats_df = pd.read_pickle(f"{transformed_data}/season_{season}_gamelog_final_stats_data.pkl")
-    gamelog_df = pd.read_pickle(f"{full_season_data}/season_full_gamelog_stats_data.pkl")
-    team_experience_df = pd.read_pickle(f"{full_season_data}/team_experience.pkl")
-    team_clusters_df = pd.read_pickle(f"{full_season_data}/team_clusters.pkl")
+    gamelog_df = pd.read_pickle(f"{full_season_data}/season_full-{season}_gamelog_stats_data.pkl")
+    team_experience_df = pd.read_pickle(f"{full_season_data}/team_experience-{season}.pkl")
+    team_clusters_df = pd.read_pickle(f"{full_season_data}/team_clusters-{season}.pkl")
 
-    # Matchups for modeling from Gamelog, 20223final stats, experience and cluster data.
-    gamelog_experience_cluster_merge(gamelog_df, team_experience_df, team_clusters_df)
+    # Matchups for modeling from Gamelog, year final stats, experience and cluster data.
+    gamelog_experience_cluster_merge(gamelog_df, team_experience_df, team_clusters_df, season=season)
     final_stats_experience_cluster_merge(final_stats_df, team_experience_df, team_clusters_df, season=season)
