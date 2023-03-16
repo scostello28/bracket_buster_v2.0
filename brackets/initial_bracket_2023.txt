@@ -1,23 +1,23 @@
-# WEST
-kansas
-howard
-arkansas
-illinois
-saint-marys-ca
-virginia-commonwealth
-connecticut
-iona
-texas-christian
-TBD #
-gonzaga
-grand-canyon
-northwestern
-boise-state
-ucla
-north-carolina-ashville
+# SOUTH
+alabama
+texas-am-corpus-christi
+maryland
+west-virginia
+san-diego-state
+manhattan
+virginia
+furman
+creighton
+north-carolina-state
+baylor
+california-santa-barbara
+missouri
+utah-state
+arizona
+princeton
 # EAST
 purdue
-TBD #
+fairleigh-dickinson
 memphis
 florida-atlantic
 duke
@@ -32,23 +32,23 @@ michigan-state
 southern-california
 marquette
 vermont
-# SOUTH
-alabama
-TBD #
-maryland
-west-virginia
-san-diego-state
-charleston
-virginia
-furman
-creighton
-north-carolina-state
-baylor
-california-santa-barbara
-missouri
-utah-state
-arizona
-princeton
+# WEST
+kansas
+howard
+arkansas
+illinois
+saint-marys-ca
+virginia-commonwealth
+connecticut
+iona
+texas-christian
+arizona-state
+gonzaga
+grand-canyon
+northwestern
+boise-state
+ucla
+north-carolina-asheville
 # MIDWEST
 houston
 northern-kentucky
@@ -59,7 +59,7 @@ drake
 indiana
 kent-state
 iowa-state
-TBD #
+pittsburgh
 xavier
 kennesaw-state
 texas-am

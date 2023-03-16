@@ -105,3 +105,9 @@
     - update season in `if __name__ == '__main__'` block
     - archive past year's brackets
     - create new initial bracket for current season's tournament
+
+
+    First four
+
+fairleigh-dickinson vs. texas-southern
+nevada vs. arizona-state

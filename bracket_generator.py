@@ -34,11 +34,27 @@ class BracketGen:
         self.championship = None
         self.champion = None
 
-        with open(pickled_model_path, 'rb') as f:
-            self.model = pickle.load(f)
+        self.model = None
+        self.models = None
+
+        self.read_model(pickled_model_path)
+
+        # with open(pickled_model_path, 'rb') as f:
+        #     self.model = pickle.load(f)
 
         self.final_stats_df = final_stats_df
         self.tcf = tcf
+
+    def read_model(self, pickled_model_path):
+        if type(pickled_model_path) == str:
+            with open(pickled_model_path, 'rb') as f:
+                self.model = pickle.load(f)
+        elif type(pickled_model_path) == dict:
+            self.models = {}
+            for model_path, weight in pickled_model_path.items():
+                with open(model_path, 'rb') as f:
+                    model = pickle.load(f)
+                self.models[model] = weight
 
     def merge(self, team1, team2):
         '''
@@ -97,20 +113,45 @@ class BracketGen:
             return team1
         else:
             return team2
-    
+
+    @staticmethod
+    def game_predict_ave(model, matchup, matchup_reversed, team1, team2):
+        '''Predict on matchup'''
+        # print(f'matchup: {matchup}')
+        print(f'{team1} vs {team2}')
+        prob = model.predict_proba(matchup)
+        prob_reversed = model.predict_proba(matchup_reversed)
+        team1_prob = (prob[0][1] + prob_reversed[0][0]) / 2 * 100
+        team2_prob = (prob[0][0] + prob_reversed[0][1]) / 2 * 100
+
+        return team1_prob, team2_prob
 
     @staticmethod
     def _pick_winner_random(team1, team2):
         matchup = [team1, team2]
         winner = matchup[randint(0,1)]
         return winner
-
     
     def _pick_winner(self, team1, team2):
         matchup, team1, team2 = self.merge(team1, team2)
         matchup_reversed, team2_rev, team1_rev = self.merge(team2, team1)
         return BracketGen.game_predict(self.model, matchup, matchup_reversed, team1, team2)
 
+    def _pick_winner_ave(self, team1, team2):
+        matchup, team1, team2 = self.merge(team1, team2)
+        matchup_reversed, team2_rev, team1_rev = self.merge(team2, team1)
+
+        team1_prob = 0
+        team2_prob = 0
+        for model, weight in self.models.items():
+            team1_prob_i, team2_prob_i = BracketGen.game_predict_ave(model, matchup, matchup_reversed, team1, team2)
+            team1_prob += team1_prob_i * weight
+            team2_prob += team2_prob_i * weight
+        
+        if team1_prob > team2_prob:
+            return team1
+        else:
+            return team2
     
     def _pick_round(self, round_list):
         next_round = []
@@ -118,19 +159,36 @@ class BracketGen:
         while i <= len(round_list)-2:
             team1, team2 = round_list[i], round_list[i+1]
             winner = self._pick_winner(team1, team2)
-#             print(f"{team1} v {team2} - {winner} wins")
             next_round.append(winner)
             i += 2
         return next_round
 
+    def _pick_round_ave(self, round_list):
+        next_round = []
+        i = 0
+        while i <= len(round_list)-2:
+            team1, team2 = round_list[i], round_list[i+1]
+            winner = self._pick_winner_ave(team1, team2)
+            next_round.append(winner)
+            i += 2
+        return next_round
     
-    def gen_bracket(self, verbose=True, bracket_name=None):
-        self.second_round = self._pick_round(self.first_round)
-        self.sweet16 = self._pick_round(self.second_round)
-        self.elite8 = self._pick_round(self.sweet16)
-        self.final4 = self._pick_round(self.elite8)
-        self.championship = self._pick_round(self.final4)
-        self.champion = self._pick_round(self.championship)
+    def gen_bracket(self, verbose=True, bracket_name=None, model_ave=False):
+
+        if model_ave:
+            self.second_round = self._pick_round_ave(self.first_round)
+            self.sweet16 = self._pick_round_ave(self.second_round)
+            self.elite8 = self._pick_round_ave(self.sweet16)
+            self.final4 = self._pick_round_ave(self.elite8)
+            self.championship = self._pick_round_ave(self.final4)
+            self.champion = self._pick_round_ave(self.championship)
+        else:
+            self.second_round = self._pick_round(self.first_round)
+            self.sweet16 = self._pick_round(self.second_round)
+            self.elite8 = self._pick_round(self.sweet16)
+            self.final4 = self._pick_round(self.elite8)
+            self.championship = self._pick_round(self.final4)
+            self.champion = self._pick_round(self.championship)
 
         if bracket_name:
 
@@ -248,3 +306,16 @@ if __name__ == '__main__':
         final_stats_df=finalgames, 
         tcf=False)
     gb.gen_bracket(bracket_name=f"gb_{season}")
+
+    ave_models = {
+        models["gb"]: .9,
+        # models["rf"]: .25,
+        models["lr"]: .1,
+    }
+
+    ave = BracketGen(
+        bracket=bracket, 
+        pickled_model_path=ave_models, 
+        final_stats_df=finalgames_exp_tcf, 
+        tcf=True)
+    ave.gen_bracket(bracket_name=f"model_ave_{season}", model_ave=True)
