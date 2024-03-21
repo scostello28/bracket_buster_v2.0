@@ -39,11 +39,11 @@
 - filters.py
 
 **TODO for next update**
-- Add config so only need to  update season in one place
+- Add config so only need to update season in one place
 - add season to file names on files that need archived
     - player_per100_full_date.pkl
     - player_stats_full.pkl
-    - rostaer_full_data.csv
+    - roster_full_data.csv
     - season-full_game_log_stats_data.pkl
     - team_clusters.pkl
     - team_experience.pkl
@@ -75,7 +75,7 @@
 4. `player_scraper.py`
     - saves `player_per100_{season}_data.pkl` & `roster_{season}_data.csv` to `0_scraped_data` dir
 5. `gamelog_stats_transform.py`
-    - saves `season_{season}_gamelog_stats_data.pkl` and `season_{season}_gamelog_final_stats_data.pkl` to `1_transformed_data` dir
+    - saves `season_{season}_gamelog_stats_data.pkl` agnd `season_{season}_gamelog_final_stats_data.pkl` to `1_transformed_data` dir
 6. `data_merger.py`
     - Manual: archive data to year specific folder
     - saves files to `2_full_season_data` dir
@@ -94,20 +94,12 @@
     - Manual: archive fit models to year specific folder
     - trains logistic regression, random forest and gradient boosting models for testing and prediction
         - testing models are trained on all data up to the current season and tested on the current season to assess model hyperparameter performance
-        - prtion models are traind on the current season with optimal hyperparameters for use in bracket creation
+        - prtion models are trained on the current season with optimal hyperparameters for use in bracket creation
     - saves models in `fit_models` dir
 10. `model_test.py`
-    - update season in `if __name__ == '__main__'` block
     - tests models in `fit_models` dir and prints results
 11. `winner_predictor.py`
-    - update season in `if __name__ == '__main__'` block
+    - can run to manually predict outcome of a matchup
 12. `bracket_generator.py`
-    - update season in `if __name__ == '__main__'` block
-    - archive past year's brackets
+    - Manual: archive past year's brackets
     - create new initial bracket for current season's tournament
-
-
-    First four
-
-fairleigh-dickinson vs. texas-southern
-nevada vs. arizona-state

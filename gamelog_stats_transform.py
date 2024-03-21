@@ -155,7 +155,7 @@ def gamelog_final_stats(seasons, source_dir, output_dir, verbose=False):
                 team_cond = (df['Tm'] == team)
                 season_cond = (df['GameType'] == 'season{}'.format(season))
                 team_df = df[team_cond & season_cond].copy()
-
+                print(team)
                 # filter to final game of season for team
                 team_df = team_df.iloc[-1, :]
 

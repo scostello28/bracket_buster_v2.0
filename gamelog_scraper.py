@@ -71,6 +71,11 @@ def add_game_type(row):
     tourney2023start = date(2023,3,15)
     tourney2023end = date(2023,4,5)
 
+    season2024start = date(2023,4,6)
+    season2024end = date(2024,3,18)
+    tourney2024start = date(2024,3,19)
+    tourney2024end = date(2024,4,9)
+
 
     if row['just_date'] >= tourney2014start and row['just_date'] <= tourney2014end:
         row['GameType'] = 'tourney2014'
@@ -131,6 +136,12 @@ def add_game_type(row):
 
     elif row['just_date'] >= season2023start and row['just_date'] <= season2023end:
         row['GameType'] = 'season2023'
+
+    elif row['just_date'] >= tourney2024start and row['just_date'] <= tourney2024end:
+        row['GameType'] = 'tourney2024'
+
+    elif row['just_date'] >= season2024start and row['just_date'] <= season2024end:
+        row['GameType'] = 'season2024'
 
     else:
         row['GameType'] = 'season'
